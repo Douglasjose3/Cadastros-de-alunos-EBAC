@@ -8,8 +8,8 @@ int registrar() { //Funcão responsável por cadastrar os ususários no sistema.
     char cpf[40];
     char nome[40];
     char sobrenome[40];
-    char profissão[40];
-    char observação[500]; //Final da criação de variáveis/string.
+    char profissao[40];
+    char observacao[500]; //Final da criação de variáveis/string.
 
     printf("Digite o CPF para cadastro: "); //Coletando as informações do usuário.
     scanf("%s", cpf); //Salva as informações da string.
@@ -19,7 +19,6 @@ int registrar() { //Funcão responsável por cadastrar os ususários no sistema.
     FILE *file; //Cria o arquivo.
     file = fopen(arquivo, "w"); //Cria o arquivo e o "w" significa escrever.
 
-    file = fopen(arquivo, "a");
     fprintf(file, "CPF: ");
 
     fprintf(file, cpf); //Salvar o valor da variável.
@@ -52,10 +51,10 @@ int registrar() { //Funcão responsável por cadastrar os ususários no sistema.
     fclose(file);
 
     printf("Digite a PROFISSÃO para cadastro! ");
-    scanf("%s", profissão);
+    scanf("%s", profissao);
 
     file = fopen(arquivo, "a");
-    fprintf(file, profissão);
+    fprintf(file, profissao);
     fclose(file);
 
     file = fopen(arquivo, "a");
@@ -63,14 +62,10 @@ int registrar() { //Funcão responsável por cadastrar os ususários no sistema.
     fclose(file);
 
     printf("OBSERVAÇÃO!\n");
-    scanf("%s", observação);
+    scanf("%s", observacao);
 
     file = fopen(arquivo, "a");
-    fprintf(file, observação);
-    fclose(file);
-
-    file = fopen(arquivo, "a");
-    fprintf(file, ".");
+    fprintf(file, observacao);
     fclose(file);
 
     getchar();
@@ -98,7 +93,7 @@ int consultar() {
         printf("%s", conteudo);
         printf("\n\n");
     }
-
+    fclose(file);
     getchar();
 }
 
@@ -112,6 +107,7 @@ int deletar() {
 
     FILE *file;
     file = fopen(cpf, "r");
+    fclose(file);
 
     if (file == NULL){
         printf("\n\nO Usuário foi deletado com sucesso!\n\n");
@@ -146,7 +142,8 @@ int main() {
         printf("\t1 - Registro de novos alunos.\n");
         printf("\t2 - Consultar cadastros dos ativos e inativos.\n");
         printf("\t3 - Deletar cadastros inativos.\n");
-        printf("\n Digite aqui a opção: "); //Fim do menu.
+        printf("\t4 - Sair do sistema.\n\n");
+        printf("Digite aqui a opção: "); //Fim do menu.
 
         scanf("%d", &opcao); //Armazenando a esolha do usuário.
         system("clear"); //Limpa todas as msgs anteriores, usar clear no lugar de cls.
@@ -160,6 +157,10 @@ int main() {
             break;
             case 3:
             deletar();
+            break;
+            case 4:
+            printf("Obrigado por utilizar o sistema.\n\n");
+            return 0;
             break;
 
             default:
